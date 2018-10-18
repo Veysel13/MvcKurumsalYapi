@@ -1,0 +1,13 @@
+﻿@model Northwind.Entities.ShippingDetails
+
+@{
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    //butun alanları bızım ıcın olusturur
+    @Html.EditorForModel()
+
+    <input type="submit" value="Complete Checkout"/>
+}

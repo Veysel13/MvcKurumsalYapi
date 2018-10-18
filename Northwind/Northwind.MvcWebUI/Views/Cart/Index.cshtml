@@ -1,0 +1,44 @@
+﻿@using Northwind.Entities
+@model Cart
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    #sil form input[type=submit] {
+        margin-left: 80%;
+        background-color: black;
+        color: white;
+    }
+</style>
+<h2>Products in the cart</h2>
+
+<table>
+    <tr>
+        <td>Product Name</td>
+        <td>Unit Price</td>
+        <td>Quantity</td>
+        <td>Total Price</td>
+        <td></td>
+    </tr>
+    
+    @foreach (var item in Model.Lines)
+    {
+        <tr>
+            <td>@item.Product.ProductName</td>
+            <td>@item.Product.UnitPrice.ToString("c")</td>
+            <td>@item.Quantity</td>
+            <td>@((item.Quantity*item.Product.UnitPrice).ToString("c"))</td>
+            <td id="sil">
+                @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                {
+                    @Html.Hidden("productId",item.Product.ProductID)
+                    <input type="submit" value=" - Remove From Cart"/>
+                }
+            </td>
+        </tr>
+    }
+</table>
+<p align="center">
+    @*<a href="@Url.Action("Checkout","Cart")">Checkout Now</a>*@
+    @Html.ActionLink("Checkout Now","Checkout","Cart")
+</p>

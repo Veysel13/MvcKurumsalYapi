@@ -1,0 +1,66 @@
+﻿@using Northwind.MvcWebUI.HtmlHelpers
+@using Northwind.MvcWebUI.Models
+@model Northwind.MvcWebUI.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "title";
+   
+}
+<style>
+    .pagerim {
+        position: absolute;
+        right: 20%;
+    }
+
+    .pagerim a {
+        margin-left: 10px;
+        font-size: 15px;
+        color:black
+    }
+    .pagerim .selected {
+
+        color: white;
+        background-color: black;
+        padding: 3px;
+    }
+    h3, h4 {
+        color: black;
+        font-weight: bold;
+    }
+    .item form input[type=submit] {
+        margin-left: 80%;
+        background-color: black;
+        color: white;
+    }
+</style>
+<h3>Ürünler</h3>
+
+<div style="margin-top: 30px;" class="list-group">
+    @foreach (var item in Model.Prodcuts)
+    {
+        <div class="item">
+            <h4>@item.ProductName</h4>
+            <h4>@item.UnitPrice</h4>
+            
+            @using (Html.BeginForm("AddToCart","Cart"))
+            {
+            //istediğimiz isimle bunu gönderebiliyoruz
+            @Html.Hidden("productId",item.ProductID)
+
+            //gelen modelden alıypr kendı aynı isimle oluşturuyor
+            @*@Html.HiddenFor(p=>item.ProductID)*@
+            <input type="submit" value="+ Add To Cart" />
+            }
+
+        </div>
+
+        
+        <hr/>
+        <br/>
+        
+    }
+    
+        <div class="pagerim">
+            @Html.Pager(Model.PageingInfo as PageingInfo)
+        </div>
+</div>

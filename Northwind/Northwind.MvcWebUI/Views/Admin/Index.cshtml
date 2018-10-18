@@ -1,0 +1,28 @@
+﻿@model List<Northwind.Entities.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Ürün Listesi</h2>
+
+@Html.ActionLink("Create New","CreateNew")
+<table>
+    <tr>
+        <td>Product Id</td>
+        <td>Product Name</td>
+        <td>Unit Price</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ProductID</td>
+            <td>@item.ProductName</td>
+            <td>@item.UnitPrice</td>
+            <td>@Html.ActionLink("Edit | ","Edit",new{productId=item.ProductID})</td>
+            <td>@Html.ActionLink(" Delte","Delete",new{productId=item.ProductID})</td>
+        </tr>
+    }
+</table>
